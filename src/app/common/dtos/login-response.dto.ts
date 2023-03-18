@@ -1,3 +1,5 @@
+import { ApiStatus } from "../enums/api-status.enum";
+
 export interface LoginResponseDto {
   data: LoginResponseDatumDto;
   error: string;
@@ -5,9 +7,5 @@ export interface LoginResponseDto {
 }
 export interface LoginResponseDatumDto {
   token: string;
-  userGroup: 0;
-}
-export enum ApiStatus {
-  Ok = 0,
-  Error = 1
+  userGroup: number;
 }
