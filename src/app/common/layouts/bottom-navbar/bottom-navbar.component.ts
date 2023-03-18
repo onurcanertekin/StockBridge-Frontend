@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bottom-navbar.component.scss']
 })
 export class BottomNavbarComponent implements OnInit {
-
+  currentTime: Date = new Date();
   constructor() { }
 
   ngOnInit() {

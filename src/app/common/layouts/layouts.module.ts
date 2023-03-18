@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { BottomNavbarComponent } from "./bottom-navbar/bottom-navbar.component";
@@ -11,9 +12,11 @@ import { TopNavbarComponent } from "./top-navbar/top-navbar.component";
     LayoutsComponent
   ],
   imports: [
+    CommonModule,
     RouterModule
   ],
   exports: [
+    LayoutsComponent
   ]
 })
 export class LayoutsModule { }
