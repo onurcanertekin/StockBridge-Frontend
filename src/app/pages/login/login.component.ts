@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginDto } from 'src/app/common/dtos/login.dto';
+import { NotifyDto } from 'src/app/common/dtos/notify.dto';
+import { ApiStatus } from 'src/app/common/enums/api-status.enum';
 import { LogoutService } from 'src/app/common/services/logout.service';
+import { NotifyService } from 'src/app/common/services/notify.service';
 import { environment } from 'src/environments/environment';
-import { ApiStatus, LoginResponseDto } from './login-response.dto';
-import { LoginDto } from './login.dto';
 import { LoginService } from './login.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService,
     private logoutService: LogoutService,
+    private notifyService: NotifyService,
     private router: Router) {
   }
 
@@ -34,14 +37,13 @@ export class LoginComponent implements OnInit {
     //prevent default event
     event.preventDefault();
     this.loginService.authorize(this.login).subscribe((res) => {
-      const loginResponse = res as LoginResponseDto;
-      if (loginResponse && loginResponse.status == ApiStatus.Ok && loginResponse.data.token) {
-        localStorage.setItem(environment.tokenName, loginResponse.data.token);
+      if (res && res.status == ApiStatus.Ok && res.data.token) {
+        localStorage.setItem(environment.tokenName, res.data.token);
         this.handleLogin(null);
         this.router.navigate(["/welcome"]);
       }
-      else if (loginResponse.status == ApiStatus.Error) {
-        this.handleLogin(loginResponse.error);
+      else if (res.status == ApiStatus.Error) {
+        this.handleLogin(res.error);
       }
       else {
         this.handleLogin("An error raised");
@@ -51,8 +53,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleLogin(errMessage: string | null) {
-    this.errorOnLogin = errMessage;
+  handleLogin(message: string | null) {
+    if (message)
+      this.notifyService.notify(<NotifyDto>{
+        isSuccess: !!message,
+        message: message
+      })
+    this.errorOnLogin = message;
     this.logoutService.checkLogged();
   }
 }
