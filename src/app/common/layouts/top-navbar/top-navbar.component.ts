@@ -22,17 +22,18 @@ export class TopNavbarComponent implements OnInit {
     });
     this.checkLogged();
   }
-
   checkLogged() {
     //Check if token exist in local storage
     const token = localStorage.getItem(environment.tokenName);
     this.isLoggedIn = !!token;
   }
 
-  loginClick() {
+  loginClick(event: Event) {
+    event.preventDefault();
     this.router.navigate(["/login"])
   }
-  logoutClick() {
+  logoutClick(event: Event) {
+    event.preventDefault();
     this.logoutService.logout();
   }
 }

@@ -13,10 +13,10 @@
     </ul>
     <form class="form-inline mt-2 mt-md-0">
       <ng-container *ngIf="!isLoggedIn; else logout">
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="loginClick()" type="submit">Login</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="loginClick($event)">Login</button>
       </ng-container>
       <ng-template #logout>
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="logoutClick()" type="submit">Logout</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="logoutClick($event)">Logout</button>
       </ng-template>
     </form>
   </div>

@@ -17,7 +17,11 @@ export class NotifyComponent implements OnInit {
     this.notifyService.notify$.subscribe((notifyData) => {
       this.showNotify(notifyData);
     });
+    this.notifyService.closeNotify$.subscribe(() => {
+      this.hideNotify();
+    });
   }
+
   showNotify(notifyData: NotifyDto) {
     this.notify = notifyData;
   }

@@ -8,8 +8,14 @@ import { NotifyDto } from '../dtos/notify.dto';
 export class NotifyService {
   private notifySource = new Subject<NotifyDto>();
   notify$ = this.notifySource.asObservable();
+  private closeNotifySource = new Subject();
+  closeNotify$ = this.closeNotifySource.asObservable();
 
   notify(notify: NotifyDto) {
     this.notifySource.next(notify);
+  }
+
+  closeNotify() {
+    this.closeNotifySource.next();
   }
 }
