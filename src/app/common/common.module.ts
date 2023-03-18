@@ -4,7 +4,6 @@ import { LayoutsModule } from "./layouts/layouts.module";
 
 @NgModule({
   declarations: [
-    LayoutsComponent
   ],
   imports: [
     LayoutsModule
