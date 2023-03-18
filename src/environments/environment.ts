@@ -1,5 +1,7 @@
 export const environment = {
+  production: false,
   projectName: "StockBridge",
   ownerName: "OE",
-  production: false
+  tokenName: "stock-bridge-token",
+  remoteUri: "http://66.70.229.82:8181"
 };
