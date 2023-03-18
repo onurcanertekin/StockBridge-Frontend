@@ -1,9 +1,7 @@
-import { ApiStatus } from "../enums/api-status.enum";
+import { BaseResponseDto } from "./base-response.dto";
 
-export interface LoginResponseDto {
+export interface LoginResponseDto extends BaseResponseDto {
   data: LoginResponseDatumDto;
-  error: string;
-  status: ApiStatus;
 }
 export interface LoginResponseDatumDto {
   token: string;
