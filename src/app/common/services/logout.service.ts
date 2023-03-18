@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LogoutService {
-
   private logoutSource = new Subject();
   isLogged$ = this.logoutSource.asObservable();
 
