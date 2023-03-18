@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { WebSocketMessageRequestDto } from '../dtos/websocket-message.dto';
+import { WebSocketMessageRequestDto, WebSocketResponseDto } from '../dtos/websocket-message.dto';
 import { SocketMessageType } from '../enums/socket-message-type.enum';
 import { LogoutService } from './logout.service';
 ;
@@ -51,19 +51,23 @@ export class WebSocketService {
     let observer = <any>{
       error: null,
       complete: null,
-      next: (data: Object) => {
-        console.log('Message sent to websocket: ', data);
+      next: (data: WebSocketResponseDto) => {
         if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify(data));
+          console.log('Message sent to websocket: ', data);
         }
       }
     };
     return new AnonymousSubject<MessageEvent>(observer, observable);
   }
 
-  /** If web socket send log off request, current user will be forced to log out  */
+  /** If web socket send log off request, current user will be forced to log out and return response */
   private onMessage(obs: Observer<MessageEvent>, message: MessageEvent<WebSocketMessageRequestDto>): any {
     if (message && message.data && message.data.messageType == SocketMessageType.LogOff) {
       this.logoutService.logout();
+      const response = <WebSocketResponseDto>{ messageType: message.data.messageType, timeStamp: new Date() };
+      const event = new MessageEvent('message', { data: response });
+      this.subject.next(event);
     }
     return obs.next.bind(obs)
   }
