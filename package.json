@@ -19,7 +19,6 @@
     "@angular/platform-browser": "11.2.14",
     "@angular/platform-browser-dynamic": "11.2.14",
     "@angular/router": "11.2.14",
-    "@aspnet/signalr": "1.0.3",
     "bootstrap": "4.6.2",
     "rxjs": "6.6.7",
     "tslib": "2.5.0",
