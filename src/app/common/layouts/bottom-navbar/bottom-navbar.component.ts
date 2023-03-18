@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'in-bottom-navbar',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomNavbarComponent implements OnInit {
   currentTime: Date = new Date();
+  environment = environment;
   constructor() { }
 
   ngOnInit() {
