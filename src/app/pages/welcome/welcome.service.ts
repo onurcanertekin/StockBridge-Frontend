@@ -8,6 +8,7 @@ export class WelcomeService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /** Sends get greeting request to remote api uri with user token header  */
   getGreetings() {
     let headers = new HttpHeaders({
       "x-user-token": localStorage.getItem(environment.tokenName) as string

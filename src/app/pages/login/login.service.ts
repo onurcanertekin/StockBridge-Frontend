@@ -9,6 +9,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /** Sends authorize request to remote api uri with login data  */
   authorize(login: LoginDto) {
     return this.httpClient.post<LoginResponseDto>(`${environment.remoteApiUri}/Authorize`,
       login)

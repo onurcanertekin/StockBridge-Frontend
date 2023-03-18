@@ -25,16 +25,21 @@ export class TopNavbarComponent implements OnInit {
     });
     this.checkLogged();
   }
+
+  /** To handle conditional tasks by user's logged status  */
   checkLogged() {
     //Check if token exist in local storage
     const token = localStorage.getItem(environment.tokenName);
     this.isLoggedIn = !!token;
   }
 
+  /** Fires when user click Login button, navigate user to login page  */
   loginClick(event: Event) {
     event.preventDefault();
     this.router.navigate(["/login"])
   }
+
+  /** Fires when user click Logout button, fire a event to logoutService's subcription  */
   logoutClick(event: Event) {
     event.preventDefault();
     this.logoutService.logout();

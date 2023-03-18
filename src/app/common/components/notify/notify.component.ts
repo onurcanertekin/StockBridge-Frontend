@@ -14,6 +14,7 @@ export class NotifyComponent implements OnInit {
   }
 
   ngOnInit() {
+    //Subscribe to both notify and closeNotify observable to handle in any request
     this.notifyService.notify$.subscribe((notifyData) => {
       this.showNotify(notifyData);
     });
@@ -22,9 +23,15 @@ export class NotifyComponent implements OnInit {
     });
   }
 
+  /** Show notify popup with sended data */
   showNotify(notifyData: NotifyDto) {
     this.notify = notifyData;
+    if (this.toast && this.toast.nativeElement) {
+      this.toast.nativeElement.hidden = false;
+    }
   }
+
+  /** Hide notify popup  */
   hideNotify() {
     this.notify = null;
     if (this.toast && this.toast.nativeElement) {

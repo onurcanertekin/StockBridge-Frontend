@@ -11,10 +11,12 @@ export class NotifyService {
   private closeNotifySource = new Subject();
   closeNotify$ = this.closeNotifySource.asObservable();
 
+  /** Notify all source subcribers to notify event just fired  */
   notify(notify: NotifyDto) {
     this.notifySource.next(notify);
   }
 
+  /** Notify all source subcribers to close notify event just fired  */
   closeNotify() {
     this.closeNotifySource.next();
   }

@@ -13,5 +13,4 @@ export class BottomNavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

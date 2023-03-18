@@ -19,6 +19,8 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     this.getGreeting();
   }
+
+  /** Get greeting message and show it to user with popup if user is logged in*/
   getGreeting() {
     if (localStorage.getItem(environment.tokenName))
       this.welcomeService.getGreetings().subscribe(res => {

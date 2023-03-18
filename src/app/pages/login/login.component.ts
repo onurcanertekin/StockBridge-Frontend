@@ -34,10 +34,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /** handle users sign in button click  */
   onSubmit(event: Event) {
     //prevent default event
     event.preventDefault();
+
     this.loginService.authorize(this.login).subscribe((res) => {
+      /** user is authorized, can redirect back to welcome page  */
       if (res && res.status == ApiStatus.Ok && res.data.token) {
         localStorage.setItem(environment.tokenName, res.data.token);
         this.webSocketService.initializeSocket();
@@ -55,6 +58,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /** Notify user and subcriber about login status must check  */
   handleLogin(message: string | null) {
     if (message)
       this.notifyService.notify(<NotifyDto>{

@@ -17,6 +17,7 @@ export class WebSocketService {
 
   constructor(private logoutService: LogoutService) { }
 
+  /** initialize and open web socket connection if current user has token in local storage  */
   initializeSocket() {
     const token = localStorage.getItem(environment.tokenName)
     if (!!token)
@@ -28,6 +29,8 @@ export class WebSocketService {
         )
       );
   }
+
+  /** Check and if not initialized create web socket subject  */
   private connect(url: string): AnonymousSubject<MessageEvent> {
     if (!this.subject) {
       this.subject = this.create(url);
@@ -36,6 +39,7 @@ export class WebSocketService {
     return this.subject;
   }
 
+  /** Create event controlled web socket and return observer and observable  */
   private create(url: string): AnonymousSubject<MessageEvent> {
     let ws = new WebSocket(url);
     let observable = new Observable((obs: Observer<MessageEvent>) => {
@@ -56,8 +60,8 @@ export class WebSocketService {
     return new AnonymousSubject<MessageEvent>(observer, observable);
   }
 
+  /** If web socket send log off request, current user will be forced to log out  */
   private onMessage(obs: Observer<MessageEvent>, message: MessageEvent<WebSocketMessageRequestDto>): any {
-    console.log("new message:", message.data);
     if (message && message.data && message.data.messageType == SocketMessageType.LogOff) {
       this.logoutService.logout();
     }
