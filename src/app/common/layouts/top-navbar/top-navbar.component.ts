@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,9 +10,11 @@ import { environment } from 'src/environments/environment';
 export class TopNavbarComponent implements OnInit {
 
   environment = environment;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
+  loginClick() {
+    this.router.navigate(["/login"])
+  }
 }
