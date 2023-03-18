@@ -12,6 +12,6 @@ export class WelcomeService {
     let headers = new HttpHeaders({
       "x-user-token": localStorage.getItem(environment.tokenName) as string
     })
-    return this.httpClient.get<GreetingResponseDto>(`${environment.remoteUri}/GetGreeting`, { headers: headers })
+    return this.httpClient.get<GreetingResponseDto>(`${environment.remoteApiUri}/GetGreeting`, { headers: headers })
   }
 }

@@ -5,6 +5,7 @@ import { NotifyDto } from 'src/app/common/dtos/notify.dto';
 import { ApiStatus } from 'src/app/common/enums/api-status.enum';
 import { LogoutService } from 'src/app/common/services/logout.service';
 import { NotifyService } from 'src/app/common/services/notify.service';
+import { WebSocketService } from 'src/app/common/services/web-socket.service';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './login.service';
 
@@ -27,8 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
     private logoutService: LogoutService,
     private notifyService: NotifyService,
-    private router: Router) {
-  }
+    private webSocketService: WebSocketService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginService.authorize(this.login).subscribe((res) => {
       if (res && res.status == ApiStatus.Ok && res.data.token) {
         localStorage.setItem(environment.tokenName, res.data.token);
+        this.webSocketService.initializeSocket();
         this.handleLogin(null);
         this.router.navigate(["/welcome"]);
       }

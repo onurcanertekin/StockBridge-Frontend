@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LogoutService } from '../../services/logout.service';
+import { WebSocketService } from '../../services/web-socket.service';
 
 @Component({
   selector: 'in-top-navbar',
@@ -13,10 +14,12 @@ export class TopNavbarComponent implements OnInit {
 
   environment = environment;
   constructor(private logoutService: LogoutService,
+    private webSocketService: WebSocketService,
     private router: Router) {
   }
 
   ngOnInit() {
+    this.webSocketService.initializeSocket();
     this.logoutService.isLogged$.subscribe(() => {
       this.checkLogged();
     });

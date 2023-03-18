@@ -3,5 +3,6 @@ export const environment = {
   projectName: "StockBridge",
   ownerName: "OE",
   tokenName: "stock-bridge-token",
-  remoteUri: "http://66.70.229.82:8181"
+  remoteWsUri: "ws://66.70.229.82:8181",
+  remoteApiUri: "http://66.70.229.82:8181",
 };
