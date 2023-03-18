@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   handleLogin(message: string | null) {
     if (message)
       this.notifyService.notify(<NotifyDto>{
-        isSuccess: !!message,
+        isSuccess: !message,
         message: message
       })
     this.errorOnLogin = message;

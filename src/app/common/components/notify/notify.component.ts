@@ -5,7 +5,6 @@ import { NotifyService } from '../../services/notify.service';
 @Component({
   selector: 'in-notify',
   templateUrl: './notify.component.html',
-  providers: [NotifyService]
 })
 export class NotifyComponent implements OnInit {
   @ViewChild('toast', { static: false }) toast!: ElementRef;
